@@ -4,68 +4,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bharath Kumar — Data Engineer & Analytics</title>
+  <meta name="description" content="Bharath Kumar — Data Engineer, Analytics & Visualization. Building and validating reliable data pipelines.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0e17'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%2338bdf8'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#0a0e17;
-      --text:#e6ebf4;
-      --muted:#8b97ab;
-      --accent:#38bdf8;       /* ← change this one line to recolor everything */
-      --accent-2:#34d399;
-      --border:rgba(148,163,184,.14);
-    }
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-
-    .hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;overflow:hidden}
-    .hero::before{content:"";position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(56,189,248,.14),transparent 60%);pointer-events:none}
-    .hero::after{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:44px 44px;opacity:.35;-webkit-mask-image:radial-gradient(circle at center,black,transparent 75%);mask-image:radial-gradient(circle at center,black,transparent 75%);pointer-events:none}
-
-    .hero-inner{position:relative;z-index:1;max-width:760px}
-    .hero-inner>*{opacity:0;animation:fadeUp .7s ease forwards}
-    .eyebrow{animation-delay:.1s;display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--muted);margin-bottom:20px}
-    .dot{width:8px;height:8px;border-radius:50%;background:var(--accent-2);animation:pulse 1.8s ease-in-out infinite}
-    .name{animation-delay:.25s;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(2.6rem,9vw,5rem);line-height:1.05;background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
-    .role{animation-delay:.4s;font-family:'Space Grotesk',sans-serif;font-size:clamp(1.1rem,3vw,1.6rem);font-weight:500;margin-top:16px;color:var(--text)}
-    .tagline{animation-delay:.55s;font-size:clamp(1rem,2.2vw,1.15rem);color:var(--muted);margin-top:18px;line-height:1.7}
-    .cta{animation-delay:.7s;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px}
-    .btn{padding:13px 26px;border-radius:10px;font-weight:600;font-size:15px;text-decoration:none;transition:transform .2s ease,filter .2s ease,border-color .2s ease,color .2s ease}
-    .btn-primary{background:var(--accent);color:var(--bg)}
-    .btn-primary:hover{transform:translateY(-3px);filter:brightness(1.1)}
-    .btn-ghost{border:1px solid var(--border);color:var(--text)}
-    .btn-ghost:hover{transform:translateY(-3px);border-color:var(--accent);color:var(--accent)}
-    .socials{animation-delay:.85s;display:flex;gap:20px;justify-content:center;margin-top:34px}
-    .socials a{color:var(--muted);transition:color .2s ease,transform .2s ease}
-    .socials a:hover{color:var(--accent);transform:translateY(-3px)}
-    .socials svg{width:24px;height:24px;fill:currentColor}
-
-    .scroll-cue{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);color:var(--muted);opacity:0;animation:fadeUp .7s ease 1.1s forwards}
-    .scroll-cue svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;animation:bounce 1.8s ease-in-out infinite}
-
-    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-    @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
-  </style>
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <main class="hero">
-    <div class="hero-inner">
-      <p class="eyebrow"><span class="dot"></span>Available for new opportunities</p>
-      <h1 class="name">Bharath Kumar</h1>
-      <p class="role">Data Engineer · Analytics · Visualization</p>
-      <p class="tagline">I build and validate the data pipelines behind reliable banking systems — turning messy data into something you can actually trust.</p>
-      <div class="cta">
-        <a href="#work" class="btn btn-primary">View my work</a>
-        <a href="#contact" class="btn btn-ghost">Get in touch</a>
-      </div>
-      <div class="socials">
-        <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.05-.02-2.06-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.34-5.47-5.95 0-1.31.47-2.39 1.24-3.23-.13-.3-.54-1.52.11-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.92 1.23 3.23 0 4.62-2.81 5.64-5.49 5.94.43.37.81 1.1.81 2.22 0 1.61-.01 2.9-.01 3.29 0 .32.22.7.83.58A12.01 12.01 0 0 0 24 12.5C24 5.87 18.63.5 12 .5z"/></svg></a>
-        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg></a>
-      </div>
+
+  <nav class="nav" id="nav">
+    <div class="wrap">
+      <a href="#top" class="brand" id="brand">BK</a>
+      <ul class="nav-links" id="navLinks"></ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"></button>
     </div>
-    <a href="#work" class="scroll-cue" aria-label="Scroll down"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+  </nav>
+
+  <header class="hero" id="top"></header>
+
+  <main>
+    <section class="section" id="about"></section>
+    <section class="section" id="skills"></section>
+    <section class="section" id="pipeline"></section>
+    <section class="section" id="work"></section>
+    <section class="section" id="experience"></section>
+    <section class="section contact" id="contact"></section>
   </main>
+
+  <footer class="footer">
+    <div class="wrap"><p id="footerText"></p></div>
+  </footer>
+
+  <!-- your content, then the code that renders it -->
+  <script src="./data.js"></script>
+  <script src="./script.js"></script>
 </body>
 </html>
