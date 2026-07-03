@@ -21,7 +21,7 @@ const PORTFOLIO = {
   social: {
     github:   "https://github.com/heybharathhere",
     linkedin: "",                       // e.g. "https://linkedin.com/in/yourname"
-    email:    "you@example.com"         // your email address
+    email:    "itsmebobbychan@gmail.com"         // your email address
   },
 
   /* ---------- ABOUT ---------- */
@@ -32,8 +32,8 @@ const PORTFOLIO = {
     ],
     // Small highlight stats shown beside the text. Edit the numbers/labels, or empty the list [] to hide.
     highlights: [
-      { value: "500K+", label: "Records validated daily" },
-      { value: "99.7%", label: "Pipeline pass rate" },
+      { value: "100M+", label: "Records validated daily" },
+      { value: "99.9%", label: "Pipeline pass rate" },
       { value: "Banking", label: "Core domain" }
     ]
   },
@@ -42,7 +42,8 @@ const PORTFOLIO = {
   skills: [
     { group: "Data & Databases",      items: ["SQL", "PL/SQL", "Data Warehousing", "ETL", "Reconciliation"] },
     { group: "Testing & Validation",  items: ["Data Quality", "Completeness Checks", "Integrity Testing", "Transformation Testing", "Defect Tracking"] },
-    { group: "Languages & Tools",     items: ["Python", "Pandas", "Excel (advanced)", "Git", "JIRA"] },
+    { group: "Languages & Tools",     items: ["Python", "Pandas", "Excel (advanced)", "Git", "Jenkins"] },
+    { group: "Automations & AI",     items: ["Power Automate", "Excel VBA & Macros", "Prompt & Context Engineer"] },
     { group: "Visualization",         items: ["Power BI", "Dashboards", "Reporting"] }
   ],
 
@@ -84,10 +85,10 @@ const PORTFOLIO = {
       { icon: "load",            label: "Load",      sub: "Warehouse" }
     ],
     metrics: [
-      { label: "Records processed",     value: 480000, format: "compact" },
-      { label: "Validation pass rate",  value: 99.7,   format: "pct1", accent: true },
+      { label: "Records processed",     value: 100000000, format: "compact" },
+      { label: "Validation pass rate",  value: 99.9,   format: "pct1", accent: true },
       { label: "Reconciled",            value: 100,    format: "pct0", accent: true },
-      { label: "Anomalies flagged",     value: 3,      format: "int" }
+      { label: "Anomalies flagged",     value: 1,      format: "int" }
     ]
   },
 
@@ -95,8 +96,8 @@ const PORTFOLIO = {
   experience: [
     {
       role:    "Data & Analytics Test Engineer",
-      company: "Accenture",           // ← edit to your real title/company/dates
-      period:  "2023 — Present",
+      company: "Cognizant",           // ← edit to your real title/company/dates
+      period:  "Aug, 2022 — Present",
       points: [
         "Validate banking data pipelines across completeness, integrity, transformation, and reconciliation.",
         "Design and run data-quality checks that catch discrepancies before they reach reporting.",
@@ -110,7 +111,7 @@ const PORTFOLIO = {
   contact: {
     heading: "Let's talk",
     text:    "Open to roles and collaborations in data engineering, analytics, and data quality. The fastest way to reach me is email.",
-    email:   "you@example.com"       // your email address
+    email:   "itsmebobbychan@gmail.com"       // your email address
   }
 
 };
