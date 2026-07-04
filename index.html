@@ -29,9 +29,10 @@
     <section class="section" id="pipeline"></section>
     <section class="section" id="work"></section>
     <section class="section" id="experience"></section>
-    <section class="section" id="secret"></section>
     <section class="section" id="play"></section>
     <section class="section contact" id="contact"></section>
+    <!-- Secret Chapter is LAST and hidden by CSS; it unlocks on full scroll / moon click -->
+    <section class="section" id="secret"></section>
   </main>
 
   <footer class="footer">
@@ -44,43 +45,33 @@
     <button class="mood-btn" id="moodBtn" aria-label="Change color mood"></button>
   </div>
 
-  <!-- Peek-a-boo astronaut + glowing moon (attached to the right wall) -->
-  <div class="astro-dock" aria-hidden="true">
-    <div class="moon"></div>
-    <div class="astro">
+  <!-- Draggable astronaut + moon. Drag the moon and the astronaut follows by "gravity". -->
+  <div class="astro-space" id="astroSpace" aria-hidden="true">
+    <div class="moon" id="moon" title="Drag me — or give me a tap"></div>
+    <div class="astro" id="astro" title="Drag me around the stars">
       <svg class="astro-svg" viewBox="0 0 110 150" xmlns="http://www.w3.org/2000/svg">
-        <!-- backpack -->
         <rect x="33" y="58" width="44" height="42" rx="13" fill="#c3cdda"/>
-        <!-- legs -->
         <rect x="44" y="98" width="10" height="26" rx="5" fill="#e7edf5"/>
         <rect x="56" y="98" width="10" height="26" rx="5" fill="#e7edf5"/>
-        <!-- boots -->
         <rect x="41" y="117" width="16" height="12" rx="5" fill="#c3cdda"/>
         <rect x="53" y="117" width="16" height="12" rx="5" fill="#c3cdda"/>
-        <!-- right arm (static) -->
         <rect x="69" y="66" width="12" height="30" rx="6" fill="#eef2f7"/>
         <circle cx="75" cy="98" r="7" fill="#f6f9fc"/>
-        <!-- body -->
         <rect x="37" y="60" width="36" height="46" rx="16" fill="#f6f9fc"/>
-        <!-- chest badge -->
         <circle cx="55" cy="82" r="6" fill="var(--accent)"/>
         <circle cx="55" cy="82" r="2.4" fill="#0a0e17"/>
-        <!-- waving arm (animated) -->
         <g class="astro-arm">
           <rect x="26" y="46" width="12" height="34" rx="6" fill="#eef2f7"/>
           <circle cx="32" cy="44" r="8" fill="#f6f9fc"/>
         </g>
-        <!-- helmet -->
         <circle cx="55" cy="40" r="30" fill="#f9fbfe"/>
         <circle cx="55" cy="41" r="22.5" fill="#141b2b"/>
-        <!-- visor reflections -->
         <ellipse cx="47" cy="33" rx="9" ry="6" fill="var(--accent)" opacity="0.55" transform="rotate(-20 47 33)"/>
         <circle cx="63" cy="47" r="4" fill="var(--accent-2)" opacity="0.6"/>
       </svg>
     </div>
   </div>
 
-  <!-- your content, then the code that renders it -->
   <script src="./data.js"></script>
   <script src="./script.js"></script>
 </body>

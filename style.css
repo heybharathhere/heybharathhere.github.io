@@ -47,8 +47,7 @@ a{color:inherit;text-decoration:none}
   font-size:13px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--accent);font-weight:600;margin-bottom:14px;
 }
-.eyebrow-arrow{display:inline-flex;color:var(--accent);animation:nudge 1.8s ease-in-out infinite}
-.eyebrow-arrow svg{width:14px;height:14px}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--accent);opacity:.7}
 .section-title{
   font-family:'Space Grotesk',sans-serif;font-weight:700;
   font-size:clamp(1.7rem,4vw,2.4rem);line-height:1.15;margin-bottom:14px;
@@ -397,9 +396,9 @@ a{color:inherit;text-decoration:none}
   padding:6px 13px;border-radius:7px;cursor:pointer;transition:color .2s,background .2s;
 }
 .ttt-diff button.on{background:var(--accent);color:var(--bg)}
-.ttt-board{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:240px;margin:0 auto}
+.ttt-board{display:grid;grid-template-columns:repeat(3,74px);grid-auto-rows:74px;gap:8px;justify-content:center;margin:6px auto 0}
 .ttt-cell{
-  aspect-ratio:1;background:var(--bg-soft);border:1px solid var(--border);border-radius:12px;
+  width:74px;height:74px;background:var(--bg-soft);border:1px solid var(--border-strong);border-radius:12px;
   font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;color:var(--text);
   display:flex;align-items:center;justify-content:center;cursor:pointer;
   transition:border-color .2s,background .2s;
@@ -452,20 +451,29 @@ a{color:inherit;text-decoration:none}
 /* =====================================================================
    PEEK-A-BOO ASTRONAUT + GLOWING MOON (attached to right wall)
    ===================================================================== */
-.astro-dock{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:35;pointer-events:none;width:150px;height:220px}
+.astro-space{position:fixed;inset:0;z-index:35;pointer-events:none;overflow:hidden}
 .moon{
-  position:absolute;top:8px;left:16px;width:54px;height:54px;border-radius:50%;
+  position:absolute;top:0;left:0;width:54px;height:54px;border-radius:50%;
   background:radial-gradient(circle at 35% 32%, #fdf6e3, #ece0c2 62%, #cdbf98);
   box-shadow:0 0 26px 6px rgba(253,246,227,.35);
   animation:moonGlow 4s ease-in-out infinite;
+  pointer-events:auto;cursor:grab;touch-action:none;will-change:transform;
 }
+.moon.grabbing{cursor:grabbing}
 .moon::before,.moon::after{content:"";position:absolute;border-radius:50%;background:rgba(150,138,102,.32)}
 .moon::before{width:12px;height:12px;top:13px;left:29px}
 .moon::after{width:8px;height:8px;top:31px;left:15px}
-.astro{position:absolute;right:0;bottom:8px;width:96px;height:150px;transform:translateX(58%);animation:peek 8s ease-in-out infinite}
-.astro-svg{width:100%;height:100%;filter:drop-shadow(0 6px 14px rgba(0,0,0,.4));animation:float 3.2s ease-in-out infinite}
+.moon.sun{
+  background:radial-gradient(circle at 35% 32%, #fff6d5, #ffd257 55%, #f6a623);
+  box-shadow:0 0 34px 12px rgba(255,205,80,.5);animation:sunGlow 4s ease-in-out infinite;
+}
+.moon.sun::before,.moon.sun::after{display:none}
+.astro{position:absolute;top:0;left:0;width:92px;height:144px;pointer-events:auto;cursor:grab;touch-action:none;will-change:transform}
+.astro.grabbing{cursor:grabbing}
+.astro-svg{width:100%;height:100%;filter:drop-shadow(0 6px 14px rgba(0,0,0,.4))}
 .astro-arm{transform-box:fill-box;transform-origin:center bottom;animation:wave 2.2s ease-in-out infinite}
-@media (max-width:900px){.astro-dock{display:none}}
+.astro-star{position:absolute;top:0;left:0;pointer-events:none;color:var(--accent);font-size:11px;line-height:1;animation:starFall 1.3s ease-out forwards;z-index:1}
+@media (max-width:760px){.astro-space{display:none}}
 
 /* =====================================================================
    ADDED KEYFRAMES
@@ -480,3 +488,57 @@ a{color:inherit;text-decoration:none}
 /* ---------- brand logo (when data.js logo is set) ---------- */
 .brand-has-logo{background:transparent;padding:4px}
 .brand-logo{width:100%;height:100%;object-fit:contain;display:block}
+
+/* =====================================================================
+   SECTION SCROLL ARROWS (the bouncing chevron, now between every block)
+   ===================================================================== */
+.section-cue{display:flex;justify-content:center;margin-top:54px;color:var(--faint);transition:color .2s}
+.section-cue:hover{color:var(--accent)}
+.section-cue svg{width:24px;height:24px;animation:bounce 1.8s ease-in-out infinite}
+
+/* =====================================================================
+   SECRET CHAPTER — hidden until unlocked (full scroll or moon tap)
+   ===================================================================== */
+#secret{display:none}
+#secret.unlocked{display:block;animation:fadeUp .8s ease}
+.secret-note{color:var(--accent-2);font-size:.95rem;margin:-6px 0 4px;font-weight:500}
+
+/* one-column fun grid when only one card is enabled */
+.play-grid.one{grid-template-columns:1fr;max-width:520px}
+
+/* =====================================================================
+   SECRET MESSAGE BOX + SECRET WALL
+   ===================================================================== */
+.secret-msg{margin-top:34px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:26px}
+.secret-msg h3{font-family:'Space Grotesk',sans-serif;font-size:1.15rem;font-weight:600;margin-bottom:6px}
+.secret-msg .sm-sub{color:var(--muted);font-size:.92rem;margin-bottom:16px}
+.sm-form{display:flex;flex-direction:column;gap:12px}
+.sm-input{
+  width:100%;background:var(--bg-soft);border:1px solid var(--border);border-radius:11px;padding:14px;
+  color:var(--text);font-family:inherit;font-size:.95rem;resize:vertical;min-height:84px;transition:border-color .2s;
+}
+.sm-input:focus{outline:none;border-color:var(--accent)}
+.sm-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.sm-confirm{color:var(--accent-2);font-size:.9rem;font-weight:500;opacity:0;transition:opacity .3s}
+.sm-confirm.show{opacity:1}
+.sm-wall{margin-top:22px;padding-top:20px;border-top:1px solid var(--border)}
+.sm-wall-label{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.sm-wall-msg{color:var(--muted);font-style:italic;font-size:1.02rem;min-height:52px;transition:opacity .5s;line-height:1.6}
+
+/* =====================================================================
+   TOAST (unlock notice / astronaut taunts)
+   ===================================================================== */
+.toast{
+  position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);
+  background:var(--card);border:1px solid var(--accent);color:var(--text);
+  padding:12px 20px;border-radius:12px;font-size:.9rem;font-weight:600;z-index:200;
+  opacity:0;transition:opacity .35s,transform .35s;box-shadow:0 12px 30px rgba(0,0,0,.4);pointer-events:none;
+  max-width:88vw;text-align:center;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* =====================================================================
+   MORE KEYFRAMES
+   ===================================================================== */
+@keyframes starFall{0%{opacity:0;transform:translateY(0) scale(.4)}25%{opacity:1}100%{opacity:0;transform:translateY(30px) scale(1.1)}}
+@keyframes sunGlow{0%,100%{box-shadow:0 0 30px 10px rgba(255,205,80,.42)}50%{box-shadow:0 0 40px 14px rgba(255,205,80,.6)}}

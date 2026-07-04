@@ -9,6 +9,23 @@
 
 const PORTFOLIO = {
 
+  /* =============================================================
+     FEATURE SWITCHES  —  turn the extra toys ON (true) or OFF (false)
+     ============================================================= */
+  features: {
+    astronaut:          true,   // draggable peek-a-boo astronaut + moon
+    fallingStars:       true,   // astronaut occasionally drops tiny stars
+    moonUnlocksChapter: true,   // tapping the moon opens the Secret Chapter
+    astronautChallenge: true,   // tapping the astronaut challenges you to Tic-Tac-Toe
+    game:               true,   // Tic-Tac-Toe
+    fortuneCookie:      true,   // Digital Fortune Cookie
+    moodSwitcher:       true,   // color-theme switcher (bottom-left)
+    secretChapter:      true,   // the hidden "Secret Chapter of Me" section
+    secretMessageBox:   true,   // the message box inside the Secret Chapter
+    sectionArrows:      true,   // animated down-arrow between every section
+    dayNight:           false   // moon becomes a sun during daytime (6am–6pm)
+  },
+
   /* ---------- BASICS ---------- */
   name: "Bharath Kumar",
   initials: "BK",                       // shown if you don't set a logo below
@@ -101,8 +118,7 @@ const PORTFOLIO = {
     }
   ],
 
-  /* ---------- SECRET CHAPTER OF ME (your passions & hobbies) ----------
-     A more personal block. Edit these to be truly yours — swap emojis and text. */
+  /* ---------- SECRET CHAPTER OF ME (hidden until a visitor scrolls all the way, or taps the moon) ---------- */
   secretChapter: {
     intro: "Beyond the pipelines and pass-rates, here's what actually makes me tick.",
     passions: [
@@ -112,6 +128,16 @@ const PORTFOLIO = {
       { emoji: "🌌", title: "Space & sci-fi", note: "Give me a night sky and a big question." },
       { emoji: "☕", title: "Coffee",         note: "The real dependency in all my projects." },
       { emoji: "✈️", title: "Travel",         note: "Collecting places, food, and stories." }
+    ],
+    // Secret Message Box
+    messagePrompt:  "Leave a secret, a note, or just say hi — no name needed.",
+    messageConfirm: "Your secret is safe among the stars. ✨",
+    // Starter messages shown on the rotating "Secret Wall" (visitor submissions get added on their own device)
+    wallSeeds: [
+      "Someone was here at 3am and left a smile. 🌙",
+      "You're doing better than you think.",
+      "First visit? Welcome to the quiet corner of the internet.",
+      "A wish was made here once. They say it came true."
     ]
   },
 
@@ -148,8 +174,7 @@ const PORTFOLIO = {
     "Today is a great day to catch that one discrepancy."
   ],
 
-  /* ---------- MOOD PALETTE SWITCHER (color themes) ----------
-     Pick colors you like. "accent" and "accent2" are the highlights; "bg" is the background. */
+  /* ---------- MOOD PALETTE SWITCHER (color themes) ---------- */
   moods: [
     { name: "Default",    accent: "#38bdf8", accent2: "#34d399", bg: "#0a0e17" },
     { name: "Calm",       accent: "#7dd3fc", accent2: "#a5b4fc", bg: "#0b1020" },
