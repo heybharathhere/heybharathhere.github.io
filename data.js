@@ -11,11 +11,11 @@ const PORTFOLIO = {
 
   /* ---------- BASICS ---------- */
   name: "Bharath Kumar",
-  initials: "BK",                       // shown in the top-left nav
+  initials: "B",                       // shown in the top-left nav
   role: "Data Engineer · Analytics · Visualization",
   availability: "Available for new opportunities",  // set "" to hide the little badge
   tagline: "I build and validate the data pipelines behind reliable banking systems — turning messy, high-volume data into something teams can actually trust.",
-  resumeUrl: "",                        // paste a link to your resume PDF, or leave "" to hide the button
+  resumeUrl: "https://drive.google.com/file/d/1kCu6m3cLK9sZpqIiKpWQ09zWlA-aib-C/view?usp=drive_link",                        // paste a link to your resume PDF, or leave "" to hide the button
 
   /* ---------- SOCIAL LINKS (leave any "" to hide it) ---------- */
   social: {
@@ -86,22 +86,33 @@ const PORTFOLIO = {
     ],
     metrics: [
       { label: "Records processed",     value: 100000000, format: "compact" },
-      { label: "Validation pass rate",  value: 99.9,   format: "pct1", accent: true },
+      { label: "Validation pass rate",  value: 100,   format: "pct1", accent: true },
       { label: "Reconciled",            value: 100,    format: "pct0", accent: true },
-      { label: "Anomalies flagged",     value: 1,      format: "int" }
+      { label: "Anomalies flagged",     value: 0,      format: "int" }
     ]
   },
 
   /* ---------- EXPERIENCE (newest first) ---------- */
   experience: [
     {
-      role:    "Data & Analytics Test Engineer",
+      role:    "Data Engineer & Analytics",
       company: "Cognizant",           // ← edit to your real title/company/dates
-      period:  "Aug, 2022 — Present",
+      period:  "Aug, 2022 — Oct, 2024",
       points: [
         "Validate banking data pipelines across completeness, integrity, transformation, and reconciliation.",
         "Design and run data-quality checks that catch discrepancies before they reach reporting.",
         "Track and drive resolution of data defects with engineering teams."
+      ]
+    },
+   {
+      role:    "Data Visualization - Power BI Devolper",
+      company: "Cognizant",           // ← edit to your real title/company/dates
+      period:  "Oct, 2024 — Present",
+      points: [
+                 "Transform complex banking datasets into interactive Power BI dashboards that drive data-driven decision-making.",
+                 "Develop optimized DAX measures and Power Query transformations to handle high-volume, mission-critical data.",
+                 "Create user-centric visualizations that simplify complex reconciliation logic for stakeholders.",
+                 "Build automated reporting solutions that replace manual tracking, significantly increasing team efficiency."
       ]
     }
     // ← add earlier roles by copying the block above
