@@ -15,14 +15,15 @@ const ICONS = {
   close:'<path d="M6 6l12 12M18 6 6 18"/>',
   play:'<path d="M7 5v14l12-7z" fill="currentColor" stroke="none"/>',
   clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 2"/>',
+  palette:'<circle cx="13.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/><circle cx="17.5" cy="10.5" r="1.5" fill="currentColor" stroke="none"/><circle cx="8.5" cy="7.5" r="1.5" fill="currentColor" stroke="none"/><circle cx="6.5" cy="12.5" r="1.5" fill="currentColor" stroke="none"/><path d="M12 2a10 10 0 1 0 0 20c1.66 0 2-1.34 2-2 0-.5-.2-.96-.53-1.29-.32-.32-.47-.75-.47-1.21a1.5 1.5 0 0 1 1.5-1.5H16a5 5 0 0 0 5-5c0-4.42-4.03-8-9-8z"/>',
   database:'<ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.66 3.58 3 8 3s8-1.34 8-3V6"/><path d="M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/>',
   transform:'<path d="M4 8h13m0 0-3.5-3.5M17 8l-3.5 3.5"/><path d="M20 16H7m0 0 3.5-3.5M7 16l3.5 3.5"/>',
   shield:'<path d="M12 3l7 3v5.5c0 4.2-3 7.3-7 8.5-4-1.2-7-4.3-7-8.5V6z"/><path d="M9 12l2 2 4-4"/>',
   load:'<path d="M12 3v10m0 0 3.5-3.5M12 13 8.5 9.5"/><path d="M5 16v2.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V16"/>'
 };
 function icon(name, size){
-  const s = size || 32;
-  return `<svg viewBox="0 0 32 32" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICONS[name]||''}</svg>`;
+  const s = size || 24;
+  return `<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICONS[name]||''}</svg>`;
 }
 function esc(str){ return String(str==null?'':str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
@@ -40,17 +41,34 @@ function fmt(v, f){
 
 const D = PORTFOLIO;
 
+/* small shared helper for section headers (with consistent animated arrow) */
+function header(eyebrow, title, intro){
+  return `<div class="reveal">
+    <span class="eyebrow"><span class="eyebrow-arrow">${icon('chevronRight',14)}</span>${esc(eyebrow)}</span>
+    <h2 class="section-title">${esc(title)}</h2>
+    ${intro ? `<p class="section-intro">${esc(intro)}</p>` : ''}
+  </div>`;
+}
+
 /* =====================================================================
    NAV
    ===================================================================== */
 function buildNav(){
-  document.getElementById('brand').textContent = D.initials || (D.name ? D.name[0] : '·');
+  const brand = document.getElementById('brand');
+  if(D.logo){
+    brand.innerHTML = `<img class="brand-logo" src="${esc(D.logo)}" alt="${esc(D.name)}">`;
+    brand.classList.add('brand-has-logo');
+  } else {
+    brand.textContent = D.initials || (D.name ? D.name[0] : '\u00b7');
+  }
 
   const links = [];
   if(D.about && D.about.paragraphs && D.about.paragraphs.length) links.push(['about','About']);
   if(D.skills && D.skills.length) links.push(['skills','Skills']);
   if(D.projects && D.projects.length) links.push(['work','Work']);
   if(D.experience && D.experience.length) links.push(['experience','Experience']);
+  if(D.secretChapter && D.secretChapter.passions && D.secretChapter.passions.length) links.push(['secret','Chapter']);
+  if(D.game || (D.fortunes && D.fortunes.length)) links.push(['play','Play']);
   links.push(['contact','Contact']);
 
   document.getElementById('navLinks').innerHTML = links.map(
@@ -90,15 +108,6 @@ function buildHero(){
     <a href="#about" class="scroll-cue" aria-label="Scroll down">${icon('chevronDown',22)}</a>`;
 }
 
-/* ---------- small helper for section headers ---------- */
-function header(eyebrow, title, intro){
-  return `<div class="reveal">
-    <span class="eyebrow">${esc(eyebrow)}</span>
-    <h2 class="section-title">${esc(title)}</h2>
-    ${intro ? `<p class="section-intro">${esc(intro)}</p>` : ''}
-  </div>`;
-}
-
 /* =====================================================================
    ABOUT
    ===================================================================== */
@@ -113,7 +122,7 @@ function buildAbout(){
   el.innerHTML = `<div class="wrap">
     <div class="about-grid">
       <div class="about-text reveal">
-        <span class="eyebrow">About</span>
+        <span class="eyebrow"><span class="eyebrow-arrow">${icon('chevronRight',14)}</span>About</span>
         <h2 class="section-title">A bit about me</h2>
         ${D.about.paragraphs.map(p=>`<p>${esc(p)}</p>`).join('')}
       </div>
@@ -240,7 +249,7 @@ function buildProjects(){
 
   el.querySelectorAll('.project').forEach(card=>{
     card.addEventListener('click', e=>{
-      if(e.target.closest('.js-stop')) return; // let links work without toggling
+      if(e.target.closest('.js-stop')) return;
       card.classList.toggle('open');
     });
   });
@@ -266,29 +275,203 @@ function buildExperience(){
 }
 
 /* =====================================================================
-   CONTACT + FOOTER
+   SECRET CHAPTER OF ME
    ===================================================================== */
-function buildContact(){
-  const c = D.contact || {};
-  const s = D.social || {};
-  const socials = [
-    s.github   && `<a href="${esc(s.github)}" target="_blank" rel="noopener" aria-label="GitHub">${icon('github',21)}</a>`,
-    s.linkedin && `<a href="${esc(s.linkedin)}" target="_blank" rel="noopener" aria-label="LinkedIn">${icon('linkedin',21)}</a>`,
-    (c.email||s.email) && `<a href="mailto:${esc(c.email||s.email)}" aria-label="Email">${icon('mail',21)}</a>`
-  ].filter(Boolean).join('');
+function buildSecret(){
+  const el = document.getElementById('secret');
+  const sc = D.secretChapter;
+  if(!(sc && sc.passions && sc.passions.length)){ if(el) el.remove(); return; }
+  const cards = sc.passions.map(p=>`
+    <div class="passion reveal">
+      <div class="passion-emoji">${esc(p.emoji)}</div>
+      <div>
+        <h3>${esc(p.title)}</h3>
+        <p>${esc(p.note)}</p>
+      </div>
+    </div>`).join('');
+  el.innerHTML = `<div class="wrap">
+    ${header('Off the clock','Secret Chapter of Me', sc.intro||'')}
+    <div class="secret-grid">${cards}</div>
+  </div>`;
+}
 
-  document.getElementById('contact').innerHTML = `<div class="wrap">
-    <div class="reveal">
-      <span class="eyebrow" style="justify-content:center">Contact</span>
-      <h2 class="section-title">${esc(c.heading||'Get in touch')}</h2>
-      <p class="contact-text">${esc(c.text||'')}</p>
-      ${(c.email||s.email) ? `<a href="mailto:${esc(c.email||s.email)}" class="btn btn-primary">${icon('mail',17)} ${esc(c.email||s.email)}</a>` : ''}
-      ${socials ? `<div class="contact-social">${socials}</div>` : ''}
-    </div>
+/* =====================================================================
+   FUN & GAMES (Tic-Tac-Toe + Fortune Cookie)
+   ===================================================================== */
+function buildPlay(){
+  const el = document.getElementById('play');
+  const hasGame = !!D.game;
+  const hasFortune = D.fortunes && D.fortunes.length;
+  if(!hasGame && !hasFortune){ if(el) el.remove(); return; }
+
+  const gameCard = hasGame ? `
+    <div class="play-card reveal">
+      <h3>Tic-Tac-Toe</h3>
+      <p class="play-sub">You're X. Beat the machine — if you can. Try Hard mode.</p>
+      <div class="ttt-controls">
+        <div class="ttt-diff" id="tttDiff">
+          <button data-diff="easy" class="on">Easy</button>
+          <button data-diff="hard">Hard</button>
+        </div>
+      </div>
+      <div class="ttt-board" id="tttBoard"></div>
+      <div class="ttt-msg" id="tttMsg">Your move.</div>
+      <button class="btn btn-ghost ttt-reset" id="tttReset">Restart</button>
+    </div>` : '';
+
+  const fortuneCard = hasFortune ? `
+    <div class="play-card reveal">
+      <h3>Digital Fortune Cookie</h3>
+      <p class="play-sub">A little something for your day.</p>
+      <div class="fortune">
+        <div class="fortune-cookie" id="fortuneCookie" title="Crack it open" role="button" tabindex="0">\ud83e\udd60</div>
+        <p class="fortune-text" id="fortuneText"></p>
+        <p class="fortune-hint">tap the cookie for another</p>
+      </div>
+    </div>` : '';
+
+  el.innerHTML = `<div class="wrap">
+    ${header('Take a break','Fun & Games','A couple of little things I built into the site for fun.')}
+    <div class="play-grid">${gameCard}${fortuneCard}</div>
   </div>`;
 
-  document.getElementById('footerText').textContent =
-    `© ${new Date().getFullYear()} ${D.name} · Built and deployed on GitHub Pages`;
+  if(hasGame) initGame();
+  if(hasFortune) initFortune();
+}
+
+function initGame(){
+  const boardEl = document.getElementById('tttBoard');
+  const msgEl = document.getElementById('tttMsg');
+  const diffEl = document.getElementById('tttDiff');
+  const resetBtn = document.getElementById('tttReset');
+  const LINES=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+  let board, over, difficulty='easy';
+
+  function pick(list){ return list[Math.floor(Math.random()*list.length)]; }
+  function winnerOf(b){
+    for(const line of LINES){ const [a,c,d]=line; if(b[a] && b[a]===b[c] && b[a]===b[d]) return {who:b[a],line:line}; }
+    return null;
+  }
+  function minimax(b, isAI){
+    const w=winnerOf(b);
+    if(w) return { score: w.who==='O'?10:-10, index:-1 };
+    if(b.every(Boolean)) return { score:0, index:-1 };
+    let best = { score: isAI?-Infinity:Infinity, index:-1 };
+    for(let i=0;i<9;i++){
+      if(!b[i]){
+        b[i]=isAI?'O':'X';
+        const s=minimax(b,!isAI).score;
+        b[i]='';
+        if(isAI ? s>best.score : s<best.score) best={score:s,index:i};
+      }
+    }
+    return best;
+  }
+  function aiMove(){
+    const empties=[];
+    board.forEach((v,i)=>{ if(!v) empties.push(i); });
+    if(!empties.length) return;
+    let idx;
+    if(difficulty==='hard'){ idx = minimax(board.slice(), true).index; if(idx<0) idx=pick(empties); }
+    else { idx = pick(empties); }
+    board[idx]='O';
+  }
+  function render(winLine){
+    boardEl.innerHTML = board.map((v,i)=>{
+      const cls = v==='X'?'x':(v==='O'?'o':'');
+      const filled = v?'filled':'';
+      const win = winLine && winLine.indexOf(i)>-1 ? 'win' : '';
+      return `<div class="ttt-cell ${cls} ${filled} ${win}" data-i="${i}">${v?`<span class="mark">${v}</span>`:''}</div>`;
+    }).join('');
+  }
+  function finish(result){
+    over=true;
+    if(result==='X') msgEl.textContent = pick(D.game.winPhrases);
+    else if(result==='O') msgEl.textContent = pick(D.game.losePhrases);
+    else msgEl.textContent = pick(D.game.drawPhrases);
+  }
+  function play(i){
+    if(over || board[i]) return;
+    board[i]='X';
+    let w=winnerOf(board);
+    if(w){ render(w.line); return finish('X'); }
+    if(board.every(Boolean)){ render(); return finish('draw'); }
+    aiMove();
+    w=winnerOf(board);
+    if(w){ render(w.line); return finish('O'); }
+    render();
+    if(board.every(Boolean)) return finish('draw');
+    msgEl.textContent='Your move.';
+  }
+  function reset(){ board=Array(9).fill(''); over=false; msgEl.textContent='Your move.'; render(); }
+
+  boardEl.addEventListener('click', e=>{
+    const cell=e.target.closest('.ttt-cell'); if(!cell) return;
+    play(parseInt(cell.dataset.i,10));
+  });
+  diffEl.addEventListener('click', e=>{
+    const b=e.target.closest('button'); if(!b) return;
+    difficulty=b.dataset.diff;
+    Array.prototype.forEach.call(diffEl.children, c=>c.classList.toggle('on', c===b));
+    reset();
+  });
+  resetBtn.addEventListener('click', reset);
+  reset();
+}
+
+function initFortune(){
+  const cookie=document.getElementById('fortuneCookie');
+  const text=document.getElementById('fortuneText');
+  const list=D.fortunes;
+  let last=-1;
+  function show(){
+    let i=Math.floor(Math.random()*list.length);
+    if(list.length>1 && i===last) i=(i+1)%list.length;
+    last=i;
+    text.style.animation='none'; void text.offsetWidth; text.style.animation='pop .3s ease';
+    text.textContent = list[i];
+  }
+  cookie.addEventListener('click', show);
+  cookie.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); show(); } });
+  show();
+}
+
+/* =====================================================================
+   MOOD PALETTE SWITCHER
+   ===================================================================== */
+function initMood(){
+  const moods = (D.moods && D.moods.length) ? D.moods : null;
+  const wrap = document.getElementById('mood');
+  if(!moods || !wrap) { if(wrap) wrap.remove(); return; }
+  const btn = document.getElementById('moodBtn');
+  const panel = document.getElementById('moodPanel');
+
+  btn.innerHTML = icon('palette',22);
+  panel.innerHTML = `<div class="mood-title">Pick a mood</div>` + moods.map((m,i)=>`
+    <button class="mood-opt" data-i="${i}">
+      <span class="mood-swatch" style="background:linear-gradient(135deg, ${esc(m.accent)}, ${esc(m.accent2)})"></span>
+      ${esc(m.name)}
+    </button>`).join('');
+
+  function apply(m){
+    const r=document.documentElement.style;
+    if(m.accent)  r.setProperty('--accent', m.accent);
+    if(m.accent2) r.setProperty('--accent-2', m.accent2);
+    if(m.bg)      r.setProperty('--bg', m.bg);
+    try{ localStorage.setItem('portfolioMood', m.name); }catch(e){}
+  }
+  try{
+    const saved=localStorage.getItem('portfolioMood');
+    if(saved){ const m=moods.find(x=>x.name===saved); if(m) apply(m); }
+  }catch(e){}
+
+  btn.addEventListener('click', e=>{ e.stopPropagation(); panel.classList.toggle('open'); });
+  panel.addEventListener('click', e=>{
+    const b=e.target.closest('.mood-opt'); if(!b) return;
+    apply(moods[parseInt(b.dataset.i,10)]);
+    panel.classList.remove('open');
+  });
+  document.addEventListener('click', ()=>panel.classList.remove('open'));
 }
 
 /* =====================================================================
@@ -303,7 +486,7 @@ function setupReveal(){
 
 function setupNav(){
   const nav = document.getElementById('nav');
-  const links = Array.from(document.querySelectorAll('.nav-link'));
+  const links = Array.prototype.slice.call(document.querySelectorAll('.nav-link'));
   const sections = links.map(l=>document.getElementById(l.dataset.sec)).filter(Boolean);
 
   function onScroll(){
@@ -316,7 +499,6 @@ function setupNav(){
   window.addEventListener('scroll', onScroll, { passive:true });
   onScroll();
 
-  // mobile menu
   const toggle = document.getElementById('navToggle');
   const menu = document.getElementById('navLinks');
   toggle.addEventListener('click', ()=>{
@@ -344,7 +526,36 @@ document.addEventListener('DOMContentLoaded', ()=>{
   buildPipeline();
   buildProjects();
   buildExperience();
+  buildSecret();
+  buildPlay();
   buildContact();
+  initMood();
   setupReveal();
   setupNav();
 });
+
+/* =====================================================================
+   CONTACT + FOOTER  (defined after init; function declarations hoist)
+   ===================================================================== */
+function buildContact(){
+  const c = D.contact || {};
+  const s = D.social || {};
+  const socials = [
+    s.github   && `<a href="${esc(s.github)}" target="_blank" rel="noopener" aria-label="GitHub">${icon('github',21)}</a>`,
+    s.linkedin && `<a href="${esc(s.linkedin)}" target="_blank" rel="noopener" aria-label="LinkedIn">${icon('linkedin',21)}</a>`,
+    (c.email||s.email) && `<a href="mailto:${esc(c.email||s.email)}" aria-label="Email">${icon('mail',21)}</a>`
+  ].filter(Boolean).join('');
+
+  document.getElementById('contact').innerHTML = `<div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow" style="justify-content:center"><span class="eyebrow-arrow">${icon('chevronRight',14)}</span>Contact</span>
+      <h2 class="section-title">${esc(c.heading||'Get in touch')}</h2>
+      <p class="contact-text">${esc(c.text||'')}</p>
+      ${(c.email||s.email) ? `<a href="mailto:${esc(c.email||s.email)}" class="btn btn-primary">${icon('mail',17)} ${esc(c.email||s.email)}</a>` : ''}
+      ${socials ? `<div class="contact-social">${socials}</div>` : ''}
+    </div>
+  </div>`;
+
+  document.getElementById('footerText').textContent =
+    `\u00a9 ${new Date().getFullYear()} ${D.name} · Built and deployed on GitHub Pages`;
+}

@@ -47,7 +47,8 @@ a{color:inherit;text-decoration:none}
   font-size:13px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--accent);font-weight:600;margin-bottom:14px;
 }
-.eyebrow::before{content:"";width:22px;height:1px;background:var(--accent);opacity:.7}
+.eyebrow-arrow{display:inline-flex;color:var(--accent);animation:nudge 1.8s ease-in-out infinite}
+.eyebrow-arrow svg{width:14px;height:14px}
 .section-title{
   font-family:'Space Grotesk',sans-serif;font-weight:700;
   font-size:clamp(1.7rem,4vw,2.4rem);line-height:1.15;margin-bottom:14px;
@@ -362,3 +363,120 @@ a{color:inherit;text-decoration:none}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
 @keyframes pflow{0%{left:0%;opacity:0}15%{opacity:1}85%{opacity:1}100%{left:100%;opacity:0}}
+
+/* =====================================================================
+   SECRET CHAPTER OF ME
+   ===================================================================== */
+.secret-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:44px}
+.passion{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:22px;display:flex;gap:16px;align-items:flex-start;
+  transition:transform .25s ease,border-color .25s ease;
+}
+.passion:hover{transform:translateY(-4px);border-color:var(--accent)}
+.passion-emoji{font-size:1.9rem;line-height:1;flex-shrink:0}
+.passion h3{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:600;margin-bottom:5px}
+.passion p{color:var(--muted);font-size:.92rem;line-height:1.6}
+
+/* =====================================================================
+   FUN & GAMES (Tic-Tac-Toe + Fortune Cookie)
+   ===================================================================== */
+.play-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:22px;margin-top:44px;align-items:stretch}
+.play-card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:26px;display:flex;flex-direction:column;
+}
+.play-card h3{font-family:'Space Grotesk',sans-serif;font-size:1.15rem;font-weight:600;margin-bottom:6px}
+.play-card .play-sub{color:var(--muted);font-size:.9rem;margin-bottom:18px}
+
+/* --- tic-tac-toe --- */
+.ttt-controls{display:flex;gap:10px;align-items:center;margin-bottom:16px;flex-wrap:wrap;justify-content:center}
+.ttt-diff{display:inline-flex;background:rgba(148,163,184,.08);border:1px solid var(--border);border-radius:9px;padding:3px}
+.ttt-diff button{
+  background:none;border:none;color:var(--muted);font-size:.82rem;font-weight:600;
+  padding:6px 13px;border-radius:7px;cursor:pointer;transition:color .2s,background .2s;
+}
+.ttt-diff button.on{background:var(--accent);color:var(--bg)}
+.ttt-board{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:240px;margin:0 auto}
+.ttt-cell{
+  aspect-ratio:1;background:var(--bg-soft);border:1px solid var(--border);border-radius:12px;
+  font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;color:var(--text);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  transition:border-color .2s,background .2s;
+}
+.ttt-cell:not(.filled):hover{border-color:var(--accent);background:var(--card-hover)}
+.ttt-cell.x{color:var(--accent)}
+.ttt-cell.o{color:var(--accent-2)}
+.ttt-cell.filled{cursor:default}
+.ttt-cell.win{background:rgba(56,189,248,.14);border-color:var(--accent)}
+.ttt-cell .mark{display:inline-block;animation:pop .25s ease}
+.ttt-msg{text-align:center;margin-top:18px;min-height:24px;font-weight:600;color:var(--text)}
+.ttt-reset{margin:14px auto 0}
+
+/* --- fortune cookie --- */
+.fortune{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.fortune-cookie{font-size:3.2rem;cursor:pointer;transition:transform .2s ease;user-select:none;line-height:1}
+.fortune-cookie:hover{transform:scale(1.08) rotate(-6deg)}
+.fortune-cookie:active{transform:scale(.92)}
+.fortune-text{color:var(--muted);font-size:1rem;margin:20px 0 6px;max-width:280px;min-height:52px;font-style:italic;line-height:1.6}
+.fortune-hint{color:var(--faint);font-size:.8rem}
+
+/* =====================================================================
+   MOOD PALETTE SWITCHER (floating, bottom-left)
+   ===================================================================== */
+.mood{position:fixed;left:18px;bottom:18px;z-index:60}
+.mood-btn{
+  width:46px;height:46px;border-radius:50%;background:var(--card);
+  border:1px solid var(--border-strong);color:var(--accent);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .2s,border-color .2s;
+}
+.mood-btn:hover{transform:translateY(-3px) rotate(15deg);border-color:var(--accent)}
+.mood-btn svg{width:22px;height:22px}
+.mood-panel{
+  position:absolute;left:0;bottom:58px;background:var(--card);
+  border:1px solid var(--border-strong);border-radius:14px;padding:8px;
+  display:none;flex-direction:column;gap:2px;min-width:158px;
+  box-shadow:0 12px 30px rgba(0,0,0,.4);
+}
+.mood-panel.open{display:flex;animation:pop .2s ease}
+.mood-title{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);padding:6px 10px 8px;font-weight:600}
+.mood-opt{
+  display:flex;align-items:center;gap:11px;background:none;border:none;color:var(--text);
+  font-size:.88rem;font-weight:500;padding:9px 10px;border-radius:9px;cursor:pointer;
+  transition:background .2s;text-align:left;
+}
+.mood-opt:hover{background:rgba(148,163,184,.1)}
+.mood-swatch{width:16px;height:16px;border-radius:5px;flex-shrink:0}
+
+/* =====================================================================
+   PEEK-A-BOO ASTRONAUT + GLOWING MOON (attached to right wall)
+   ===================================================================== */
+.astro-dock{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:35;pointer-events:none;width:150px;height:220px}
+.moon{
+  position:absolute;top:8px;left:16px;width:54px;height:54px;border-radius:50%;
+  background:radial-gradient(circle at 35% 32%, #fdf6e3, #ece0c2 62%, #cdbf98);
+  box-shadow:0 0 26px 6px rgba(253,246,227,.35);
+  animation:moonGlow 4s ease-in-out infinite;
+}
+.moon::before,.moon::after{content:"";position:absolute;border-radius:50%;background:rgba(150,138,102,.32)}
+.moon::before{width:12px;height:12px;top:13px;left:29px}
+.moon::after{width:8px;height:8px;top:31px;left:15px}
+.astro{position:absolute;right:0;bottom:8px;width:96px;height:150px;transform:translateX(58%);animation:peek 8s ease-in-out infinite}
+.astro-svg{width:100%;height:100%;filter:drop-shadow(0 6px 14px rgba(0,0,0,.4));animation:float 3.2s ease-in-out infinite}
+.astro-arm{transform-box:fill-box;transform-origin:center bottom;animation:wave 2.2s ease-in-out infinite}
+@media (max-width:900px){.astro-dock{display:none}}
+
+/* =====================================================================
+   ADDED KEYFRAMES
+   ===================================================================== */
+@keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(3px)}}
+@keyframes pop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes wave{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(24deg)}}
+@keyframes peek{0%,18%{transform:translateX(60%)}34%,60%{transform:translateX(4%)}80%,100%{transform:translateX(60%)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes moonGlow{0%,100%{box-shadow:0 0 22px 5px rgba(253,246,227,.3)}50%{box-shadow:0 0 34px 10px rgba(253,246,227,.52)}}
+
+/* ---------- brand logo (when data.js logo is set) ---------- */
+.brand-has-logo{background:transparent;padding:4px}
+.brand-logo{width:100%;height:100%;object-fit:contain;display:block}

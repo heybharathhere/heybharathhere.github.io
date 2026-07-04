@@ -11,17 +11,19 @@ const PORTFOLIO = {
 
   /* ---------- BASICS ---------- */
   name: "Bharath Kumar",
-  initials: "B",                       // shown in the top-left nav
+  initials: "BK",                       // shown if you don't set a logo below
+  logo: "",                             // put your logo file name here, e.g. "logo.png"
+                                        // (upload the image to your repo first). Leave "" to use initials.
   role: "Data Engineer · Analytics · Visualization",
   availability: "Available for new opportunities",  // set "" to hide the little badge
   tagline: "I build and validate the data pipelines behind reliable banking systems — turning messy, high-volume data into something teams can actually trust.",
-  resumeUrl: "https://drive.google.com/file/d/1kCu6m3cLK9sZpqIiKpWQ09zWlA-aib-C/view?usp=drive_link",                        // paste a link to your resume PDF, or leave "" to hide the button
+  resumeUrl: "",                        // paste a link to your resume PDF, or leave "" to hide the button
 
   /* ---------- SOCIAL LINKS (leave any "" to hide it) ---------- */
   social: {
     github:   "https://github.com/heybharathhere",
     linkedin: "",                       // e.g. "https://linkedin.com/in/yourname"
-    email:    "itsmebobbychan@gmail.com"         // your email address
+    email:    "you@example.com"         // your email address
   },
 
   /* ---------- ABOUT ---------- */
@@ -30,26 +32,22 @@ const PORTFOLIO = {
       "I'm a data professional focused on the unglamorous but critical layer of analytics: making sure the numbers are right. Day to day, I design and run validation across banking data pipelines — completeness, integrity, transformation logic, and reconciliation.",
       "My favourite kind of work is catching the discrepancy nobody else spotted before it reaches a report. I care about clean data, clear checks, and results people can defend in a room."
     ],
-    // Small highlight stats shown beside the text. Edit the numbers/labels, or empty the list [] to hide.
     highlights: [
-      { value: "100M+", label: "Records validated daily" },
-      { value: "99.9%", label: "Pipeline pass rate" },
+      { value: "500K+", label: "Records validated daily" },
+      { value: "99.7%", label: "Pipeline pass rate" },
       { value: "Banking", label: "Core domain" }
     ]
   },
 
-  /* ---------- SKILLS (grouped — add/remove groups or items freely) ---------- */
+  /* ---------- SKILLS ---------- */
   skills: [
     { group: "Data & Databases",      items: ["SQL", "PL/SQL", "Data Warehousing", "ETL", "Reconciliation"] },
     { group: "Testing & Validation",  items: ["Data Quality", "Completeness Checks", "Integrity Testing", "Transformation Testing", "Defect Tracking"] },
-    { group: "Languages & Tools",     items: ["Python", "Pandas", "Excel (advanced)", "Git", "Jenkins"] },
-    { group: "Automations & AI",     items: ["Power Automate", "Excel VBA & Macros", "Prompt & Context Engineer"] },
+    { group: "Languages & Tools",     items: ["Python", "Pandas", "Excel (advanced)", "Git", "JIRA"] },
     { group: "Visualization",         items: ["Power BI", "Dashboards", "Reporting"] }
   ],
 
-  /* ---------- PROJECTS / CASE STUDIES ----------
-     Each project shows a summary on the card; clicking it reveals problem → approach → result.
-     Copy a { ... } block to add more. Delete blocks you don't want. */
+  /* ---------- PROJECTS / CASE STUDIES ---------- */
   projects: [
     {
       title:   "Banking data pipeline validation",
@@ -59,7 +57,7 @@ const PORTFOLIO = {
       approach:"Built a layered validation suite covering completeness (source vs target counts), integrity (keys, nulls, duplicates), transformation logic, and end-to-end reconciliation — with clear pass/fail reporting on every run.",
       result:  "Discrepancies are now caught at the pipeline level instead of in reports, cutting downstream defects and giving stakeholders numbers they can trust.",
       tech:    ["SQL", "Python", "Reconciliation"],
-      link:    ""   // optional: link to a repo, write-up, or demo
+      link:    ""
     },
     {
       title:   "Reconciliation reporting",
@@ -71,58 +69,99 @@ const PORTFOLIO = {
       tech:    ["SQL", "Excel", "Automation"],
       link:    ""
     }
-    // ← add another project by copying a block above
   ],
 
-  /* ---------- LIVE PIPELINE (your signature element) ----------
-     This is the animated demo behind the "Run pipeline" button.
-     Edit stage labels and the metric numbers to match your real work. */
+  /* ---------- LIVE PIPELINE (your signature element) ---------- */
   pipeline: {
     stages: [
-      { icon: "database",        label: "Source",    sub: "Core banking" },
-      { icon: "transform",       label: "Transform", sub: "ETL rules" },
-      { icon: "shield",          label: "Validate",  sub: "12 checks", highlight: true },
-      { icon: "load",            label: "Load",      sub: "Warehouse" }
+      { icon: "database",  label: "Source",    sub: "Core banking" },
+      { icon: "transform", label: "Transform", sub: "ETL rules" },
+      { icon: "shield",    label: "Validate",  sub: "12 checks", highlight: true },
+      { icon: "load",      label: "Load",      sub: "Warehouse" }
     ],
     metrics: [
-      { label: "Records processed",     value: 100000000, format: "compact" },
-      { label: "Validation pass rate",  value: 100,   format: "pct1", accent: true },
+      { label: "Records processed",     value: 480000, format: "compact" },
+      { label: "Validation pass rate",  value: 99.7,   format: "pct1", accent: true },
       { label: "Reconciled",            value: 100,    format: "pct0", accent: true },
-      { label: "Anomalies flagged",     value: 0,      format: "int" }
+      { label: "Anomalies flagged",     value: 3,      format: "int" }
     ]
   },
 
   /* ---------- EXPERIENCE (newest first) ---------- */
   experience: [
     {
-      role:    "Data Engineer & Analytics",
-      company: "Cognizant",           // ← edit to your real title/company/dates
-      period:  "Aug, 2022 — Oct, 2024",
+      role:    "Data & Analytics Test Engineer",
+      company: "Accenture",
+      period:  "2023 — Present",
       points: [
         "Validate banking data pipelines across completeness, integrity, transformation, and reconciliation.",
         "Design and run data-quality checks that catch discrepancies before they reach reporting.",
         "Track and drive resolution of data defects with engineering teams."
       ]
-    },
-   {
-      role:    "Data Visualization - Power BI Devolper",
-      company: "Cognizant",           // ← edit to your real title/company/dates
-      period:  "Oct, 2024 — Present",
-      points: [
-                 "Transform complex banking datasets into interactive Power BI dashboards that drive data-driven decision-making.",
-                 "Develop optimized DAX measures and Power Query transformations to handle high-volume, mission-critical data.",
-                 "Create user-centric visualizations that simplify complex reconciliation logic for stakeholders.",
-                 "Build automated reporting solutions that replace manual tracking, significantly increasing team efficiency."
-      ]
     }
-    // ← add earlier roles by copying the block above
+  ],
+
+  /* ---------- SECRET CHAPTER OF ME (your passions & hobbies) ----------
+     A more personal block. Edit these to be truly yours — swap emojis and text. */
+  secretChapter: {
+    intro: "Beyond the pipelines and pass-rates, here's what actually makes me tick.",
+    passions: [
+      { emoji: "🎮", title: "Gaming",         note: "Strategy games and anything that rewards a well-planned move." },
+      { emoji: "🎧", title: "Music",          note: "A good playlist is my debugging co-pilot." },
+      { emoji: "📚", title: "Learning",       note: "Always mid-way through a course on something new." },
+      { emoji: "🌌", title: "Space & sci-fi", note: "Give me a night sky and a big question." },
+      { emoji: "☕", title: "Coffee",         note: "The real dependency in all my projects." },
+      { emoji: "✈️", title: "Travel",         note: "Collecting places, food, and stories." }
+    ]
+  },
+
+  /* ---------- TIC-TAC-TOE MESSAGES (playful — make them your own) ---------- */
+  game: {
+    winPhrases: [
+      "Okay, you actually beat me. Respect. 🎉",
+      "You win! The universe is clearly on your side today. 🌟",
+      "Victory! Go treat yourself — you've earned it. ✨",
+      "Beaten fair and square. You're having a good day. 😄"
+    ],
+    losePhrases: [
+      "Ha! Better luck next time, human. 🤖",
+      "Is that your final move? My circuits barely warmed up. 😏",
+      "Defeated! Don't worry — I've had a lot of practice. 😎",
+      "So close… and yet, not close at all. 😜"
+    ],
+    drawPhrases: [
+      "A draw! Great minds think alike. 🤝",
+      "Stalemate — nobody blinks. 🧊",
+      "Dead even. Rematch? 🔁"
+    ]
+  },
+
+  /* ---------- DIGITAL FORTUNE COOKIE (shown on each visit) ---------- */
+  fortunes: [
+    "Your next deploy passes on the first try. 🍀",
+    "The bug you fear is smaller than you think.",
+    "A pipeline you validate today saves someone a headache tomorrow.",
+    "Clean data is coming your way. ✨",
+    "Trust the checks. Then check again.",
+    "Something you've been stuck on will suddenly make sense.",
+    "Good things reconcile to those who wait. 🧮",
+    "Today is a great day to catch that one discrepancy."
+  ],
+
+  /* ---------- MOOD PALETTE SWITCHER (color themes) ----------
+     Pick colors you like. "accent" and "accent2" are the highlights; "bg" is the background. */
+  moods: [
+    { name: "Default",    accent: "#38bdf8", accent2: "#34d399", bg: "#0a0e17" },
+    { name: "Calm",       accent: "#7dd3fc", accent2: "#a5b4fc", bg: "#0b1020" },
+    { name: "Energetic",  accent: "#fb923c", accent2: "#f43f5e", bg: "#150f13" },
+    { name: "Mysterious", accent: "#a78bfa", accent2: "#22d3ee", bg: "#0a0912" }
   ],
 
   /* ---------- CONTACT ---------- */
   contact: {
     heading: "Let's talk",
     text:    "Open to roles and collaborations in data engineering, analytics, and data quality. The fastest way to reach me is email.",
-    email:   "itsmebobbychan@gmail.com"       // your email address
+    email:   "you@example.com"
   }
 
 };
