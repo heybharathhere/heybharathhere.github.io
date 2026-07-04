@@ -94,14 +94,14 @@ const PORTFOLIO = {
     stages: [
       { icon: "database",  label: "Source",    sub: "Core banking" },
       { icon: "transform", label: "Transform", sub: "ETL rules" },
-      { icon: "shield",    label: "Validate",  sub: "12 checks", highlight: true },
+      { icon: "shield",    label: "Validate",  sub: "12+ checks", highlight: true },
       { icon: "load",      label: "Load",      sub: "Warehouse" }
     ],
     metrics: [
-      { label: "Records processed",     value: 480000, format: "compact" },
-      { label: "Validation pass rate",  value: 99.7,   format: "pct1", accent: true },
+      { label: "Records processed",     value: 100000000, format: "compact" },
+      { label: "Validation pass rate",  value: 100,   format: "pct1", accent: true },
       { label: "Reconciled",            value: 100,    format: "pct0", accent: true },
-      { label: "Anomalies flagged",     value: 3,      format: "int" }
+      { label: "Anomalies flagged",     value: 0,      format: "int" }
     ]
   },
 
